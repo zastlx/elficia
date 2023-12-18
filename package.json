@@ -3,6 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "dependencies": {
+    "@cocos/creator-types": "^3.8.1",
+    "spitroast": "^1.4.3",
     "typescript": "^5.3.3"
   },
   "scripts": {

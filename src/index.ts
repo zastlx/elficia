@@ -1,6 +1,7 @@
-import { ModuleManager } from "./Module/ModuleManager";
+import { moduleManager } from "./Module/ModuleManager";
+import { testModule } from "@modules/index";
 
-const moduleManager = new ModuleManager();
+moduleManager.registerModule(testModule);
 
 // @ts-ignore
 window.mm = moduleManager;

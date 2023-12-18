@@ -5,6 +5,7 @@ await esbuild.build({
 	bundle: true,
 	minify: true,
     format: "iife",
+	external: ["cc"],
 	target: ["esnext"],
 	outfile: "dist/elficia.js"
 });

@@ -76,16 +76,33 @@ abstract class Module implements IModule {
 
         this.enabled = doEnable;
     }
+
+    isEnabled(): boolean {
+        return this.enabled;
+    }
+
+    getSettings(): (ModuleSetting | ModuleSettingBool | ModuleSettingNumber | ModuleSettingString | ModuleSettingEnum)[] {
+        return this.settings;
+    }
+
+    getCatagory(): ModuleCatagory {
+        return this.catagory;
+    }
+
+    getDescription(): string {
+        return this.description;
+    }
+
+    getName(): string {
+        return this.name;
+    }
  
-    abstract getName(): string;
-    abstract getDescription(): string;
-    abstract getSettings(): (ModuleSetting | ModuleSettingBool | ModuleSettingNumber | ModuleSettingString | ModuleSettingEnum)[];
-    abstract getCatagory(): ModuleCatagory;
-    abstract isEnabled(): boolean;
+    abstract getDisplayName(): string;
     abstract onEnable(): void;
     abstract onDisable(): void;
 
     
 }
+const moduleManager = new ModuleManager();
 
-export { Module, ModuleManager };
+export { Module, ModuleManager, moduleManager };

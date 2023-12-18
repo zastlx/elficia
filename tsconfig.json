@@ -6,7 +6,17 @@
         "outFile": "dist/index.js",
         "strict": true,
         "noEmit": true,
-        "allowImportingTsExtensions": true
+        "allowImportingTsExtensions": true,
+        "types": [
+            "@cocos/creator-types/engine",
+            "@cocos/creator-types/editor",
+        ],
+        "baseUrl": "./src/",
+        "paths": {
+            "@api/*": ["./api/*"],
+            "@cctypes/*": ["./types/*"],
+            "@modules/*": ["./Module/Modules/*"],
+        }
     },
     "include": [
         "src/**/*.ts"
