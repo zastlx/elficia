@@ -6,6 +6,9 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "bun run ./scripts/build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.19.9"
   }
 }

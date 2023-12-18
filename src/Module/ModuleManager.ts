@@ -88,4 +88,4 @@ abstract class Module implements IModule {
     
 }
 
-export { Module };
+export { Module, ModuleManager };
