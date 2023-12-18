@@ -1,0 +1,11 @@
+{
+  "name": "elficia",
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "build": "tsc"
+  }
+}
