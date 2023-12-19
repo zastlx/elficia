@@ -7,7 +7,13 @@ import { moduleManager } from "Module/ModuleManager";
 
 
 const toggleOpenGui = useState(false, (open: boolean) => gui.setStyle({ display: open ? "flex" : "none" }));
-const toggleOpenCats = useState(false, (open: boolean) => catagories.forEach((catagory) => catagory.catagory.setStyle({ display: open ? "flex" : "none" })));
+const toggleOpenCats = useState(false, (open: boolean) => {
+    catagories.forEach((catagory, index) => {
+        setTimeout(() => {
+            catagory.catagory.setStyle({ display: open ? "flex" : "none" })
+        }, index * 100);
+    });
+});
 
 const gui = createElement("div", { id: "gui", style: guiStyles })
     .appendTo(document.body);
