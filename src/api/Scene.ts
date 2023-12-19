@@ -17,8 +17,12 @@ function getScene(): Scene {
 }
 
 function getLocalBall() {
-    return getNetworkManager()._netGame.localPlayer
+    return getNetworkManager()._netGame.localPlayer.localState.visual.node;
+}
+
+function getBallController() {
+    return getNetworkManager()._netGame.localPlayer.localState.visual;
 }
 
 
-export { getScene };
+export { getScene, getLocalBall, getBallController };

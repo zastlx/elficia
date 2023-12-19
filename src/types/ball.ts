@@ -1,4 +1,4 @@
-import { Vec3, Color } from "cc";
+import { Vec3, Color, Node } from "cc";
 
 interface BallController {
     aimWidget: {
@@ -44,6 +44,8 @@ interface BallController {
     InAir: boolean;
     _isAiming: boolean;
     animating: boolean;
+
+    node: Node;
 
 }
 

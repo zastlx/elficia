@@ -1,4 +1,4 @@
-import { Component, Prefab } from "cc";
+import { Component } from "cc";
 import { BallController } from "./ball";
 
 interface NetUser {

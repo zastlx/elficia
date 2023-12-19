@@ -1,9 +1,9 @@
-import { getScene } from "@api/Scene";
+import { getLocalBall, getScene } from "@api/Scene";
 import { Module } from "../../ModuleManager";
 
 class TestModule extends Module {
     constructor() {
-        super("TestModule", "A test module", "Elficia", "World")
+        super("TestModule", "A test module", "Elficia", "World", "f")
     }
 
     getDisplayName(): string {
@@ -11,8 +11,7 @@ class TestModule extends Module {
     }
 
     onEnable(): void {
-        console.log(getScene());
-    
+        getLocalBall().setPosition(getLocalBall().getPosition().add3f(0, 5, 0));
     }
 
     onDisable(): void {

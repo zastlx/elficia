@@ -1,3 +1,4 @@
+import keybindManager from "keybind/KeybindManager";
 import { IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types.ts";
 
 class ModuleManager implements IModuleManager {
@@ -22,15 +23,17 @@ abstract class Module implements IModule {
     private readonly description: string;
     private readonly author: string;
     private readonly catagory: ModuleCatagory;
+    public keybind: string | undefined;
     private settings: (ModuleSetting | ModuleSettingBool | ModuleSettingNumber | ModuleSettingString | ModuleSettingEnum)[] = [];
 
-    constructor(name: string, description: string, author: string, catagory: ModuleCatagory) {
+    constructor(name: string, description: string, author: string, catagory: ModuleCatagory, keybind?: string) {
         console.log(`Loading module ${name}`);
 
         this.name = name;
         this.description = description;
         this.author = author;
         this.catagory = catagory;
+        this.setKeybind(keybind ?? "");
     }
 
     public registerBoolSetting(name: string, description: string, defaultValue: boolean): void {
@@ -95,6 +98,12 @@ abstract class Module implements IModule {
 
     getName(): string {
         return this.name;
+    }
+
+    setKeybind(keybind: string): void {
+        this.keybind = keybind;
+        keybindManager.removeKeybind(this.keybind ?? "");
+        keybindManager.addKeybind(keybind, () => this.toggleEnabled());
     }
  
     abstract getDisplayName(): string;
