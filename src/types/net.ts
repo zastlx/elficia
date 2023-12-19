@@ -1,4 +1,5 @@
 import { Component, Prefab } from "cc";
+import { BallController } from "./ball";
 
 interface NetUser {
 	avatar_url: string;
@@ -87,6 +88,7 @@ interface NetworkManager extends Component {
 		localUser: NetUser;
 		maxPlayers: number;
 		client: NetClient;
+		localPlayer: NetPlayer;
 
 		// i am unsure about most of these types
 		properties: {
@@ -160,7 +162,7 @@ interface NetPlayer {
 	local: boolean;
 	localState: {
 		golfPlayer: any; // there is so much stuff in that class
-		visual: Prefab;
+		visual: BallController;
 	};
 	netGame: NetworkManager;
 	state: {
@@ -185,6 +187,7 @@ interface NetPlayer {
 			z: number;
 		};
 	};
+	uid: string;
 
     getLocalRTT(): number;
     getUser(): NetUser;

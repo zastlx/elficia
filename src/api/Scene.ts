@@ -1,5 +1,7 @@
 import cocos from "@api/cocos";
 import { Scene } from "cc";
+import { getGameManager } from "./Game";
+import { getNetworkManager } from "./Net";
 
 
 const allScenes: {
@@ -15,7 +17,8 @@ function getScene(): Scene {
 }
 
 function getLocalBall() {
-    
+    return getNetworkManager()._netGame.localPlayer
 }
+
 
 export { getScene };
