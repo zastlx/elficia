@@ -15,6 +15,12 @@ class ModuleManager implements IModuleManager {
     public getModule(name: string): Module | undefined {
         return this.modules.find(m => m.name === name);
     }
+
+    public toggleModule(name: string, enabled?: boolean): void {
+        const module = this.getModule(name);
+        if (!module) return;
+        module.toggleEnabled(enabled);
+    }
 }
 
 abstract class Module implements IModule {
