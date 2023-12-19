@@ -7,7 +7,13 @@ import { moduleManager } from "Module/ModuleManager";
 
 
 const toggleOpenGui = useState(false, (open: boolean) => gui.setStyle({ display: open ? "flex" : "none" }));
-const toggleOpenCats = useState(false, (open: boolean) => catagories.forEach((catagory) => catagory.catagory.setStyle({ display: open ? "flex" : "none" })));
+const toggleOpenCats = useState(false, (open: boolean) => {
+    catagories.forEach((catagory, index) => {
+        setTimeout(() => {
+            catagory.catagory.setStyle({ display: open ? "flex" : "none" })
+        }, index * 100);
+    });
+});
 
 const gui = createElement("div", { id: "gui", style: guiStyles })
     .appendTo(document.body);
@@ -24,7 +30,7 @@ const catagories = config.catagories.map((catagoryName) => {
         titleLine: catagoryTitleLine
     };
 });
-const animationsStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles" }).setInnerHtml(parseCSSAnimation([
+const animationsStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles" }).setInnerHtml("@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');".concat(`* { font-family: 'VT323', monospace; };`).concat(parseCSSAnimation([
     {
         name: "guiIn",
         style: guiIn
@@ -37,7 +43,7 @@ const animationsStyle = createElement("style", { style: { display: "none" }, id:
         name: "slideOutToUp",
         style: slideOutToUp
     }
-])).appendTo(document.head);
+]))).appendTo(document.head);
 
 console.log(catagories, animationsStyle);
 keybindManager.addKeybind("ShiftRight", () => {
