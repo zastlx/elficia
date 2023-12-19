@@ -8,6 +8,7 @@ const catagory = {
     border: "solid rgba(151, 69, 245, 0.5)",
     boxShadow: "0 0 9px 8px rgba(151, 69, 245, 0.1)",
     animation: "slideInFromUp 0.5s ease",
+    flexDirection: "column",
 };
 
 const catagoryTitle = {
@@ -62,10 +63,6 @@ const guiIn = {
 
 const slideInFromUp = {
     "0%": {
-        filter: "opacity(0)",
-        transform: "translateY(-100%)"
-    },
-    "0.01%": {
         filter: "opacity(0)",
         transform: "translateY(-100%)"
     },

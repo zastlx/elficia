@@ -15,7 +15,7 @@ interface IElement {
     appendTo(element: Element): IElement;
 }
 
-type elementTypes = "div" | "span" | "button" | "input" | "textarea" | "h1" | "style";
+type elementTypes = "div" | "span" | "button" | "input" | "textarea" | "h1" | "style" | "hr";
 
 const createElement = (type: elementTypes, options: createElementOptions): IElement => {
     const element = document.createElement(type);

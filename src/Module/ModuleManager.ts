@@ -21,6 +21,10 @@ class ModuleManager implements IModuleManager {
         if (!module) return;
         module.toggleEnabled(enabled);
     }
+
+    public getModules(): Module[] {
+        return this.modules;
+    }
 }
 
 abstract class Module implements IModule {

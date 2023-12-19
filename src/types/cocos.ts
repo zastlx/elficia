@@ -13,6 +13,8 @@ interface cc {
                 packedUuids: string[];
             }[];
         }[];
+
+        setFrameRate(fps: number): void;
     };
     director: cctype.Director;
 };
