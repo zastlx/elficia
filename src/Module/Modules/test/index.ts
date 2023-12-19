@@ -3,7 +3,7 @@ import { Module } from "../../ModuleManager";
 
 class TestModule extends Module {
     constructor() {
-        super("TestModule", "A test module", "World", "f")
+        super("TestModule", "A test module", "World", "KeyF")
         this.registerBoolSetting("testBool", "testing", false);
     }
 

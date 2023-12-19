@@ -2,24 +2,28 @@ class KeybindManager {
     private keybinds: { [key: string]: () => void } = {};
 
     constructor() {
-        document.getElementById("GameCanvas")!.addEventListener('keydown', this.handleKeyDown);
+        document.getElementById("GameCanvas")!.addEventListener("keydown", this.handleKeyDown);
+        document.addEventListener("keydown", this.handleKeyDown);
     }
 
     public addKeybind(key: string, callback: () => void) {
-        this.keybinds[key] = callback;
+        this.keybinds[key.toLowerCase()] = callback;
     }
 
     public removeKeybind(key: string) {
-        delete this.keybinds[key];
+        delete this.keybinds[key.toLowerCase()];
     }
 
     private handleKeyDown = (event: KeyboardEvent) => {
-        console.log(event.key);
-        const key = event.key.toLowerCase();
-        if (this.keybinds[key]) {
-            this.keybinds[key]();
-        }
+        const key = event.code.toLowerCase();
+        this.keybinds[key]?.();
     };
+
+    public destroy() {
+        document.getElementById("GameCanvas")!.removeEventListener("keydown", this.handleKeyDown);
+        document.removeEventListener("keydown", this.handleKeyDown);
+        this.keybinds = {};
+    }
 }
 let keybindManager = new KeybindManager();
 
