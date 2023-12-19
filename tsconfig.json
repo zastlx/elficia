@@ -5,11 +5,12 @@
         "outDir": "dist",
         "outFile": "dist/index.js",
         "strict": true,
+        "esModuleInterop": true,
         "noEmit": true,
         "allowImportingTsExtensions": true,
         "types": [
             "@cocos/creator-types/engine",
-            "@cocos/creator-types/editor",
+            "@cocos/creator-types/editor"
         ],
         "baseUrl": "./src/",
         "paths": {
@@ -19,7 +20,8 @@
         }
     },
     "include": [
-        "src/**/*.ts"
+        "src/**/*.ts",
+        "src/**/*.tsx"
     ],
     "exclude": [
         "node_modules"

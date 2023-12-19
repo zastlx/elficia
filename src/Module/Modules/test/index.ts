@@ -19,7 +19,6 @@ class TestModule extends Module {
     onDisable(): void {
         console.log("TestModule disabled");
     }
-
 }
 
 export default new TestModule();
