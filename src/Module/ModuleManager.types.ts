@@ -1,9 +1,15 @@
 import { Module } from "./ModuleManager";
 
+type IModuleSetting = 
+    ModuleSettingBool |
+    ModuleSettingNumber |
+    ModuleSettingString |
+    ModuleSettingEnum;
+
 interface IModule {
     getName(): string;
     getDescription(): string;
-    getSettings(): ModuleSetting[];
+    getSettings(): Map<string, IModuleSetting>;
     getCatagory(): ModuleCatagory;
     isEnabled(): boolean;
     toggleEnabled(enabled?: boolean): void;
@@ -60,5 +66,6 @@ export {
     ModuleSettingNumber,
     ModuleSettingString,
     ModuleSettingEnum,
-    ModuleCatagory
+    ModuleCatagory,
+    IModuleSetting
 };

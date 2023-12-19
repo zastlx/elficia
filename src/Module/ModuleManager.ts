@@ -1,5 +1,5 @@
 import keybindManager from "keybind/KeybindManager";
-import { IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types.ts";
+import { IModuleSetting, IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types.ts";
 
 class ModuleManager implements IModuleManager {
     private modules: Module[] = [];
@@ -21,32 +21,42 @@ abstract class Module implements IModule {
     public readonly name: string;
     private enabled: boolean = false;
     private readonly description: string;
-    private readonly author: string;
     private readonly catagory: ModuleCatagory;
     public keybind: string | undefined;
-    private settings: (ModuleSetting | ModuleSettingBool | ModuleSettingNumber | ModuleSettingString | ModuleSettingEnum)[] = [];
+    private settings: Map<string, IModuleSetting> = new Map();
 
-    constructor(name: string, description: string, author: string, catagory: ModuleCatagory, keybind?: string) {
+    constructor(name: string, description: string, catagory: ModuleCatagory, keybind?: string) {
         console.log(`Loading module ${name}`);
 
         this.name = name;
         this.description = description;
-        this.author = author;
         this.catagory = catagory;
         this.setKeybind(keybind ?? "");
     }
 
     public registerBoolSetting(name: string, description: string, defaultValue: boolean): void {
-        this.settings.push({
-            name: name,
+        // this.settings.push({
+        //     name: name,
+        //     description: description,
+        //     currentValue: defaultValue
+        // } as ModuleSettingBool);
+
+        this.settings.set(name, {
             description: description,
             currentValue: defaultValue
         } as ModuleSettingBool);
     }
 
     public registerNumberSetting(name: string, description: string, defaultValue: number, min: number, max: number): void {
-        this.settings.push({
-            name: name,
+        // this.settings.push({
+        //     name: name,
+        //     description: description,
+        //     currentValue: defaultValue,
+        //     min: min,
+        //     max: max
+        // } as ModuleSettingNumber);
+
+        this.settings.set(name, {
             description: description,
             currentValue: defaultValue,
             min: min,
@@ -55,37 +65,53 @@ abstract class Module implements IModule {
     }
 
     public registerStringSetting(name: string, description: string, defaultValue: string): void {
-        this.settings.push({
-            name: name,
+        // this.settings.push({
+        //     name: name,
+        //     description: description,
+        //     currentValue: defaultValue
+        // } as ModuleSettingString);
+
+        this.settings.set(name, {
             description: description,
             currentValue: defaultValue
         } as ModuleSettingString);
     }
 
     public registerEnumSetting(name: string, description: string, defaultValue: number, values: string[]): void {
-        this.settings.push({
-            name: name,
+        // this.settings.push({
+        //     name: name,
+        //     description: description,
+        //     currentValue: defaultValue,
+        //     values: values
+        // } as ModuleSettingEnum);
+
+        this.settings.set(name, {
             description: description,
             currentValue: defaultValue,
             values: values
         } as ModuleSettingEnum);
     }
 
-    toggleEnabled(enabled?: boolean | undefined): void {
-        const doEnable = enabled ?? !this.isEnabled();
+    toggleEnabled(enabled?: boolean): void {
+        const shouldEnable = enabled ?? !this.isEnabled();
+        this.enabled = shouldEnable;
 
-        if (doEnable) this.onEnable();
+        if (shouldEnable) this.onEnable();
         else this.onDisable();
-
-        this.enabled = doEnable;
     }
 
     isEnabled(): boolean {
         return this.enabled;
     }
 
-    getSettings(): (ModuleSetting | ModuleSettingBool | ModuleSettingNumber | ModuleSettingString | ModuleSettingEnum)[] {
+    getSettings(): Map<string, IModuleSetting> {
         return this.settings;
+    }
+
+    setSetting(name: string, value: boolean | string | number ): void {
+        const setting = this.settings.get(name);
+        if (!setting) return;
+        setting.currentValue = value;
     }
 
     getCatagory(): ModuleCatagory {

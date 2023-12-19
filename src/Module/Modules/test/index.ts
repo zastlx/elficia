@@ -3,7 +3,8 @@ import { Module } from "../../ModuleManager";
 
 class TestModule extends Module {
     constructor() {
-        super("TestModule", "A test module", "Elficia", "World", "f")
+        super("TestModule", "A test module", "World", "f")
+        this.registerBoolSetting("testBool", "testing", false);
     }
 
     getDisplayName(): string {
@@ -11,7 +12,8 @@ class TestModule extends Module {
     }
 
     onEnable(): void {
-        getLocalBall().setPosition(getLocalBall().getPosition().add3f(0, 5, 0));
+        if (this.getSettings().get("testBool")?.currentValue) getLocalBall().setPosition(getLocalBall().getPosition().add3f(0, 5, 0));
+        this.toggleEnabled(false);
     }
 
     onDisable(): void {
