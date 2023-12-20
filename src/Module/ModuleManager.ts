@@ -1,5 +1,6 @@
 import keybindManager from "keybind/KeybindManager";
 import { IModuleSetting, IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types.ts";
+import { guiManager } from "gui/GUIManager";
 
 class ModuleManager implements IModuleManager {
     private modules: Module[] = [];
@@ -9,7 +10,13 @@ class ModuleManager implements IModuleManager {
     }
 
     public registerModule(module: Module): void {
+        guiManager.registerModule(module);
         this.modules.push(module);
+    }
+
+    public removeModule(name: string): void {
+        guiManager.removeModule(name);
+        this.modules = this.modules.filter(m => m.name !== name);
     }
 
     public getModule(name: string): Module | undefined {

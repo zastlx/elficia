@@ -1,9 +1,8 @@
 import keybindManager from "keybind/KeybindManager";
 import { useState } from "./state";
 import { createElement, parseCSSAnimation } from "./helper";
-import { slideInFromUp, slideOutToUp, guiIn, gui as guiStyles, catagory as catagoryStyles, catagoryTitle as catagoryTitleStyles, catagoryTitleLine as catagoryTitleLineStyles, catagoryTitleText as catagoryTitleTextStyles } from "./styles";
+import { moduleContainer as moduleContainerStyles, slideInFromUp, slideOutToUp, guiIn, gui as guiStyles, catagory as catagoryStyles, catagoryTitle as catagoryTitleStyles, catagoryTitleLine as catagoryTitleLineStyles, catagoryTitleText as catagoryTitleTextStyles, moduleContainer } from "./styles";
 import config from "config";
-import { moduleManager } from "Module/ModuleManager";
 
 
 const toggleOpenGui = useState(false, (open: boolean) => gui.setStyle("display", open ? "flex" : "none"));
@@ -24,12 +23,14 @@ const catagories = config.catagories.map((catagoryName, index) => {
     const catagoryTitle = createElement("div", { style: catagoryTitleStyles }).appendTo(catagory.element);
     const catagoryTitleText = createElement("span", { style: catagoryTitleTextStyles }).setText(catagoryName).appendTo(catagoryTitle.element);
     const catagoryTitleLine = createElement("hr", { style: catagoryTitleLineStyles }).appendTo(catagory.element);
+    const catagoryModuleContainer= createElement("div", { style: moduleContainerStyles }).appendTo(catagory.element);
 
     return {
         catagory: catagory,
         title: catagoryTitle,
         titleText: catagoryTitleText,
-        titleLine: catagoryTitleLine
+        titleLine: catagoryTitleLine,
+        moduleContainer: catagoryModuleContainer
     };
 });
 const animationsStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles" }).setInnerHtml("@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');".concat(`* { font-family: 'VT323', monospace; };`).concat(parseCSSAnimation([
@@ -49,10 +50,8 @@ const animationsStyle = createElement("style", { style: { display: "none" }, id:
 
 console.log(catagories, animationsStyle);
 keybindManager.addKeybind("ShiftRight", () => {
-    const mods = moduleManager.getModules();
-
-    
-
     toggleOpenGui((open) => !open);
     toggleOpenCats((open) => !open)
 });
+
+export { gui, catagories, animationsStyle };

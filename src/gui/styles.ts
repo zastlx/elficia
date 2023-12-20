@@ -11,6 +11,7 @@ const catagory = {
     flexDirection: "column",
     opacity: "0",
     animationFillMode: "forwards",
+    overflow: "hidden",
 };
 
 const catagoryTitle = {
@@ -21,6 +22,7 @@ const catagoryTitle = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
 };
 
 const catagoryTitleText = {
@@ -28,9 +30,105 @@ const catagoryTitleText = {
 };
 
 const catagoryTitleLine = {
-    border: "1px solid rgba(151, 69, 245, 0.5)",
+    border: "2px solid rgba(151, 69, 245, 0.5)",
     margin: "0",
     padding: "0",
+};
+
+/*
+<div style="
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+">
+<div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">Test Module</span>
+</div><div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">name</span>
+</div><div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">name</span>
+</div><div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">Nuker</span>
+</div><div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">name/span>
+</div><div style="
+    width: 100%;
+    height: 5.5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+">
+    <span style="
+    color: white;
+    font-size: 30px;
+">Blooket</span>
+</div></div>
+*/
+
+const moduleContainer = {
+    width: "100%",
+    height: "fit-content",
+    display: "flex",
+    flexDirection: "column",
+};
+
+const module = {
+    width: "100%",
+    height: "5.5vh",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+};
+
+const moduleName = {
+    color: "white",
+    fontSize: "30px",
 };
 
 const gui = {
@@ -89,7 +187,7 @@ const slideOutToUp = {
 
 
 
-export { catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
+export { module, moduleContainer, moduleName, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
 
 /*
 .gui {

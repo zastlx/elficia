@@ -79,4 +79,4 @@ const parseCSSAnimation = (animationObjects: {
 }
 
 
-export { createElement, parseCSSAnimation };
+export { createElement, parseCSSAnimation, IElement };
