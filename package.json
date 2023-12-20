@@ -4,11 +4,13 @@
   "type": "module",
   "dependencies": {
     "@cocos/creator-types": "^3.8.1",
+    "chokidar": "^3.5.3",
     "spitroast": "^1.4.3",
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "bun run ./scripts/build.mjs"
+    "build": "bun run ./scripts/build.mjs",
+    "watch": "bun run ./scripts/watch.mjs"
   },
   "devDependencies": {
     "esbuild": "0.19.9"

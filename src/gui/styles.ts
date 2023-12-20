@@ -3,7 +3,7 @@ const catagory = {
     display: "none",
     minHeight: "55vh",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    borderRadius: "0px 0px 1.2vw 1.2vw",
+    borderRadius: "1.2vw",
     width: "15vw",
     border: "solid rgba(151, 69, 245, 0.5)",
     boxShadow: "0 0 9px 8px rgba(151, 69, 245, 0.1)",
