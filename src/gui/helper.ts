@@ -7,7 +7,7 @@ interface createElementOptions {
 interface IElement {
     element: Element;
     
-    setStyle(style: Partial<CSSStyleDeclaration>): IElement;
+    setStyle(key: string, value: string): IElement;
     setClass(className: string): IElement;
     setText(text: string): IElement;
     setInnerHtml(html: string): IElement;
@@ -24,8 +24,9 @@ const createElement = (type: elementTypes, options: createElementOptions): IElem
     if (options.style) Object.assign(element.style, options.style);
 
     return {
-        setStyle(style) {
-            Object.assign(element.style, style);
+        setStyle(thingyy, value) {
+            // @ts-ignore idek whats wrong
+            element.style[thingyy] = value;
             return this;
         },
         setClass(className) {

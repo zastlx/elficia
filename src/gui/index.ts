@@ -6,19 +6,21 @@ import config from "config";
 import { moduleManager } from "Module/ModuleManager";
 
 
-const toggleOpenGui = useState(false, (open: boolean) => gui.setStyle({ display: open ? "flex" : "none" }));
+const toggleOpenGui = useState(false, (open: boolean) => gui.setStyle("display", open ? "flex" : "none"));
 const toggleOpenCats = useState(false, (open: boolean) => {
     catagories.forEach((catagory, index) => {
-        setTimeout(() => {
-            catagory.catagory.setStyle({ display: open ? "flex" : "none" })
-        }, index * 100);
+        if (!open) catagory.catagory.setStyle("opacity", "0");
+        catagory.catagory.setStyle("display", open ? "flex" : "none");
     });
 });
 
 const gui = createElement("div", { id: "gui", style: guiStyles })
     .appendTo(document.body);
-const catagories = config.catagories.map((catagoryName) => {
-    const catagory = createElement("div", { id: `catagory-${catagoryName.toLowerCase()}`, style: catagoryStyles }).appendTo(gui.element);
+const catagories = config.catagories.map((catagoryName, index) => {
+    const catagory = createElement("div", { id: `catagory-${catagoryName.toLowerCase()}`, style: {
+        ...catagoryStyles,
+        animationDelay: `${index * 100}ms`
+    } }).appendTo(gui.element);
     const catagoryTitle = createElement("div", { style: catagoryTitleStyles }).appendTo(catagory.element);
     const catagoryTitleText = createElement("span", { style: catagoryTitleTextStyles }).setText(catagoryName).appendTo(catagoryTitle.element);
     const catagoryTitleLine = createElement("hr", { style: catagoryTitleLineStyles }).appendTo(catagory.element);
@@ -52,5 +54,5 @@ keybindManager.addKeybind("ShiftRight", () => {
     
 
     toggleOpenGui((open) => !open);
-    setTimeout(() => toggleOpenCats((open) => !open), 500 + 100);
+    toggleOpenCats((open) => !open)
 });

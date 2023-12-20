@@ -9,6 +9,8 @@ const catagory = {
     boxShadow: "0 0 9px 8px rgba(151, 69, 245, 0.1)",
     animation: "slideInFromUp 0.5s ease",
     flexDirection: "column",
+    opacity: "0",
+    animationFillMode: "forwards",
 };
 
 const catagoryTitle = {
@@ -64,11 +66,13 @@ const guiIn = {
 const slideInFromUp = {
     "0%": {
         filter: "opacity(0)",
+        opacity: "0",
         transform: "translateY(-100%)"
     },
     "100%": {
         filter: "opacity(1)",
         transform: "translateY(0)",
+        opacity: "1",
     },
 };
 
