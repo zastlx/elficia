@@ -1,10 +1,9 @@
 import { gui, catagories } from "./index";
 import { IElement, createElement } from "./helper";
 import { Module } from "Module/ModuleManager";
-import { module as moduleStyles, moduleName as moduleNameStyles } from "./styles";
+import { moduleDescription as moduleDescriptionStyles, module as moduleStyles, moduleName as moduleNameStyles } from "./styles";
 
 interface IGUIManager {
-
     registerModule(module: Module): void;
     removeModule(name: string): void;
     render(): void;
@@ -19,9 +18,17 @@ class GUIManager implements IGUIManager {
             moduleTitle: IElement;
         };
     }[] = [];
+    private moduleDescription: IElement;
 
     constructor() {
         console.log("Initlizing GUIManager");
+
+        this.moduleDescription = createElement("div", { id: "mod-desc", style: {
+                ...moduleDescriptionStyles,
+                display: "none"
+            } })
+            .setId("module-description")
+            .appendTo(gui.element);
     }
 
     public registerModule(module: Module): void {
@@ -47,7 +54,30 @@ class GUIManager implements IGUIManager {
 
             const moduleElement = createElement("div", { style: moduleStyles })
                 .setId(`module-${module.getCatagory().toLowerCase()}-${module.name}`)
-                .appendTo(catagory.moduleContainer.element);
+                .onHover((hovering) => {
+                    if (hovering) {
+                        this.moduleDescription.setText(module.getDescription());
+                        this.moduleDescription.setStyle("display", "flex");
+                        moduleElement.setStyle("backgroundImage", "");
+                        moduleElement.setStyle("backgroundColor", "rgba(151, 69, 245, 0.5)");
+                    } else {
+                        this.moduleDescription.setText("");
+                        this.moduleDescription.setStyle("display", "none");
+                        if (module.isEnabled()) {
+                            moduleElement.setStyle("backgroundImage", "linear-gradient(90deg, #9745f5, black)");
+                            moduleElement.setStyle("backgroundColor", "");
+                        }
+                        else {
+                            moduleElement.setStyle("backgroundImage", "");
+                            moduleElement.setStyle("backgroundColor", "");
+                        }
+                    }
+                })
+                .onClick(() => {
+                    module.toggleEnabled();
+                    moduleElement.setStyle("backgroundImage", module.isEnabled() ? "inear-gradient(90deg, #9745f5, black)" : "");
+                })
+                .appendTo(catagory.moduleContainer.element)
 
             const moduleTitleElement = createElement("span", { style: moduleNameStyles })
                 .setText(module.name)

@@ -12,6 +12,11 @@ interface IElement {
     setText(text: string): IElement;
     setInnerHtml(html: string): IElement;
     setId(id: string): IElement;
+
+    onHover(callback: (hovering: boolean) => void): IElement;
+    onClick(callback: () => void): IElement;
+
+    removeElement(): void;
     appendTo(element: Element): IElement;
 }
 
@@ -47,6 +52,18 @@ const createElement = (type: elementTypes, options: createElementOptions): IElem
         },
         setInnerHtml(html) {
             element.innerHTML = html;
+            return this;
+        },
+        onHover(callback) {
+            element.addEventListener("mouseenter", () => callback(true));
+            element.addEventListener("mouseleave", () => callback(false));
+            return this;
+        },
+        removeElement() {
+            element.remove();
+        },
+        onClick(callback) {
+            element.addEventListener("click", callback);
             return this;
         },
         get element() {
