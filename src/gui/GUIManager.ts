@@ -1,30 +1,37 @@
 import { gui, catagories } from "./index";
-import { IElement, createElement } from "./helper";
+import { IElement, createElement, createCssFromObjects } from "./helper";
 import { Module } from "Module/ModuleManager";
-import { moduleDescription as moduleDescriptionStyles, module as moduleStyles, moduleName as moduleNameStyles } from "./styles";
+import * as styles from "./styles";
 
 interface IGUIManager {
     registerModule(module: Module): void;
     removeModule(name: string): void;
     render(): void;
 }
-
+// this is probably the most messy code ive ever written but it works and i aint using react
 class GUIManager implements IGUIManager {
     private modules: Module[] = [];
     private moduleElements: {
         catagory: string;
         element: {
             module: IElement;
+            moduleTitleContainer: IElement;
             moduleTitle: IElement;
+            moduleTitleOpenIndicator: IElement;
+            moduleSettingsContainer: IElement;
+            moduleSettingsElements: IElement[];
         };
     }[] = [];
     private moduleDescription: IElement;
 
     constructor() {
         console.log("Initlizing GUIManager");
+        const guiStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles-settings" })
+            .setInnerHtml(createCssFromObjects(styles.sliderSettingStyles))
+            .appendTo(document.head);
 
         this.moduleDescription = createElement("div", { id: "mod-desc", style: {
-                ...moduleDescriptionStyles,
+                ...styles.moduleDescription,
                 display: "none"
             } })
             .setId("module-description")
@@ -52,42 +59,96 @@ class GUIManager implements IGUIManager {
                 continue;
             }
 
-            const moduleElement = createElement("div", { style: moduleStyles })
-                .setId(`module-${module.getCatagory().toLowerCase()}-${module.name}`)
+            let settingsOpen = false;
+
+            const moduleSettingOpenIndicator = createElement("span", { style: {
+                position: "absolute",
+                fontSize: "4vh",
+                left: "85%"
+            } })
+            .setText("+");
+            const moduleNameElementContainer = createElement("div", { style: {
+                ...styles.moduleNameContainer,
+                flexDirection: "row",
+                alignItems: "center",
+            } })
                 .onHover((hovering) => {
                     if (hovering) {
                         this.moduleDescription.setText(module.getDescription());
                         this.moduleDescription.setStyle("display", "flex");
-                        moduleElement.setStyle("backgroundImage", "");
-                        moduleElement.setStyle("backgroundColor", "rgba(151, 69, 245, 0.5)");
+                        moduleNameElementContainer.setStyle("backgroundImage", "");
+                        moduleNameElementContainer.setStyle("backgroundColor", "rgba(151, 69, 245, 0.5)");
                     } else {
                         this.moduleDescription.setText("");
                         this.moduleDescription.setStyle("display", "none");
                         if (module.isEnabled()) {
-                            moduleElement.setStyle("backgroundImage", "linear-gradient(90deg, #9745f5, black)");
-                            moduleElement.setStyle("backgroundColor", "");
+                            moduleNameElementContainer.setStyle("backgroundImage", "linear-gradient(90deg, #9745f5, black)");
+                            moduleNameElementContainer.setStyle("backgroundColor", "");
                         }
                         else {
-                            moduleElement.setStyle("backgroundImage", "");
-                            moduleElement.setStyle("backgroundColor", "");
+                            moduleNameElementContainer.setStyle("backgroundImage", "");
+                            moduleNameElementContainer.setStyle("backgroundColor", "");
                         }
                     }
                 })
                 .onClick(() => {
                     module.toggleEnabled();
-                    moduleElement.setStyle("backgroundImage", module.isEnabled() ? "inear-gradient(90deg, #9745f5, black)" : "");
+                    if (module.isEnabled()) {
+                        moduleNameElementContainer.setStyle("backgroundImage", "linear-gradient(90deg, #9745f5, black)");
+                        moduleNameElementContainer.setStyle("backgroundColor", "");
+                    }
+                    else {
+                        moduleNameElementContainer.setStyle("backgroundImage", "");
+                        moduleNameElementContainer.setStyle("backgroundColor", "");
+                    }
                 })
-                .appendTo(catagory.moduleContainer.element)
-
-            const moduleTitleElement = createElement("span", { style: moduleNameStyles })
+                .onRightClick(() => {
+                    if (settingsOpen) {
+                        moduleSettingOpenIndicator.setText("+");
+                        moduleSettingsContainer.setStyle("display", "none");
+                        settingsOpen = false;
+                    } else {
+                        moduleSettingOpenIndicator.setText("-");
+                        moduleSettingsContainer.setStyle("display", "flex");
+                        settingsOpen = true;
+                    }
+                });
+            const moduleNameElement = createElement("span", {})
                 .setText(module.name)
+                .appendTo(moduleNameElementContainer.element);
+            const moduleElement = createElement("div", { style: styles.module })
+                .setId(`module-${module.getCatagory().toLowerCase()}-${module.name}`)
+                .appendTo(catagory.moduleContainer.element);
+            moduleNameElementContainer.appendTo(moduleElement.element);
+            const moduleSettingsContainer = createElement("div", { style: styles.moduleSettingsContainer })
                 .appendTo(moduleElement.element);
+            
+            moduleSettingOpenIndicator.appendTo(moduleNameElementContainer.element);
+
+            const moduleSettingsElements: IElement[] = [];
+            
+            const testSliderSetting = createElement("div", { style: styles.sliderModuleSetting })
+                .appendTo(moduleSettingsContainer.element);
+            const testSliderSettingTitle = createElement("span", { style: {} })
+                .setText("Slider:");
+            const testSliderSettingSliderContainer = createElement("div", { style: styles.sliderModuleSettingSliderContainer });
+            const testSliderSettingSlider = createElement("input", { style: styles.sliderModuleSettingSliderInput }, { type: "range", min: "0", max: "100", value: "50" });
+        
+            testSliderSettingTitle.appendTo(testSliderSetting.element);
+            testSliderSettingSliderContainer.appendTo(testSliderSetting.element);
+            testSliderSettingSlider.appendTo(testSliderSettingSliderContainer.element);
+            moduleSettingsElements.push(testSliderSetting);
+
 
             this.moduleElements.push({
                 catagory: module.getCatagory().toLowerCase(),
                 element: {
                     module: moduleElement,
-                    moduleTitle: moduleTitleElement
+                    moduleTitleContainer: moduleNameElementContainer,
+                    moduleTitle: moduleNameElement,
+                    moduleTitleOpenIndicator: moduleSettingOpenIndicator,
+                    moduleSettingsContainer: moduleSettingsContainer,
+                    moduleSettingsElements: moduleSettingsElements
                 }
             });
         }

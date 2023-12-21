@@ -23,7 +23,7 @@ const catagories = config.catagories.map((catagoryName, index) => {
     const catagoryTitle = createElement("div", { style: catagoryTitleStyles }).appendTo(catagory.element);
     const catagoryTitleText = createElement("span", { style: catagoryTitleTextStyles }).setText(catagoryName).appendTo(catagoryTitle.element);
     const catagoryTitleLine = createElement("hr", { style: catagoryTitleLineStyles }).appendTo(catagory.element);
-    const catagoryModuleContainer= createElement("div", { style: moduleContainerStyles }).appendTo(catagory.element);
+    const catagoryModuleContainer = createElement("div", { style: moduleContainerStyles }).appendTo(catagory.element);
 
     return {
         catagory: catagory,

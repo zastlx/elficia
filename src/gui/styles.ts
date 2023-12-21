@@ -1,7 +1,6 @@
 const catagory = {
     height: "fit-content",
     display: "none",
-    minHeight: "55vh",
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     borderRadius: "1.2vw",
     width: "15vw",
@@ -57,23 +56,28 @@ const moduleDescription = {
 };
 
 /*
-    position: absolute;
-    bottom: 0;
-    border: solid rgba(151, 69, 245, 0.5);
+<div id="module-world-TestModule" style="width: 100%; height: max-content; min-height: 5.5vh; display: flex; padding: 0px; justify-content: center; align-items: center; flex-direction: column; margin: 0px;"><div style="
+    position: relative;
+    width: 100%;
+    top: 0;
     left: 0;
-    color: white;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.5);
-    box-shadow: rgba(151, 69, 245, 0.1) 0px 0px 9px 8px;
-    min-width: 7vw;
-    margin: 2vh;
-    font-size: 2.2vh;
-    padding-left: 1vw;
-    padding-right: 1vw;
-    width: fit-content;
-    height: 4vh;
+    padding: 0;
+    margin: 0;
+    height: 5.5vh;
+    min-height: 100%;
+    flex-direction: column;
+    align-content: center;
     justify-content: center;
-    align-items: center;
+"><span style="color: white; font-size: 3vh;">TestModule</span></div><div style="
+    position: relative;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    height: 10vh;
+    display: none;
+    width: 100%;
+"></div></div>
 */
 
 const moduleContainer = {
@@ -85,15 +89,77 @@ const moduleContainer = {
 
 const module = {
     width: "100%",
-    height: "5.5vh",
+    height: "max-content",
+    minHeight: "5.5vh",
     display: "flex",
+    padding: "0px",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    flexDirection: "column",
+    margin: "0px",
 };
 
-const moduleName = {
+const moduleNameContainer = {
+    position: "relative",
+    width: "100%",
+    top: "0",
+    left: "0",
+    display: "flex",
+    padding: "0",
+    margin: "0",
+    height: "5.5vh",
+    minHeight: "100%",
+    flexDirection: "column",
+    alignContent: "center",
+    justifyContent: "center",
     color: "white",
     fontSize: "3vh",
+};
+
+const moduleSettingsContainer = {
+    position: "relative",
+    top: "0",
+    left: "0",
+    overflow: "hidden",
+    height: "10vh",
+    display: "none",
+    width: "100%",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+};
+
+const sliderModuleSetting = {
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    color: "white",
+    fontSize: "2.2vh",
+    justifyContent: "center",
+    boxSizing: "border-box",
+    paddingLeft: "2vh",
+    paddingRight: "2vh",
+    alignItems: "flex-start",
+};
+/*
+    height: 2vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid white;
+    */
+const sliderModuleSettingSliderContainer = {
+    height: "2vh",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    border: "1px solid white",
+};
+
+const sliderModuleSettingSliderInput = {
+    width: "100%",
+    padding: "0",
+    appearance: "none",
 };
 
 const gui = {
@@ -150,8 +216,53 @@ const slideOutToUp = {
 };
 
 
+const sliderSettingStyles = [
+    {
+        selector: "input[type=range]::-webkit-slider-thumb",
+        style: {
+            appearance: "none",
+            width: "2vw",
+            height: "2vw",
+            borderRadius: "50%",
+            background: "rgba(151, 69, 245, 0.5)",
+            cursor: "pointer",
+        }
+    },
+    {
+        selector: "input[type=range]::-webkit-slider-runnable-track",
+        style: {
+            width: "100%",
+            height: "0.5vw",
+            cursor: "pointer",
+            background: "rgba(151, 69, 245, 0.5)",
+        }
+    },
+    // FF
+    {
+        selector: "input[type=range]::-moz-range-thumb",
+        style: {
+            appearance: "none",
+            width: "2vw",
+            height: "2vw",
+            borderRadius: "50%",
+            background: "rgba(151, 69, 245, 0.5)",
+            cursor: "pointer",
+        }
+    },
+    {
+        selector: "input[type=range]::-moz-range-track",
+        style: {
+            width: "100%",
+            height: "0.5vw",
+            cursor: "pointer",
+            background: "rgba(151, 69, 245, 0.5)",
+        }
+    },
+];
 
-export { moduleDescription, module, moduleContainer, moduleName, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
+
+
+export { sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
 
 /*
 .gui {

@@ -15,6 +15,7 @@ interface IElement {
 
     onHover(callback: (hovering: boolean) => void): IElement;
     onClick(callback: () => void): IElement;
+    onRightClick(callback: () => void): IElement;
 
     removeElement(): void;
     appendTo(element: Element): IElement;
@@ -22,11 +23,18 @@ interface IElement {
 
 type elementTypes = "div" | "span" | "button" | "input" | "textarea" | "h1" | "style" | "hr";
 
-const createElement = (type: elementTypes, options: createElementOptions): IElement => {
+const createElement = (type: elementTypes, options: createElementOptions, raw?: {
+    [key: string]: any
+}): IElement => {
     const element = document.createElement(type);
     if (options.className) element.className = options.className;
     if (options.id) element.id = options.id;
     if (options.style) Object.assign(element.style, options.style);
+
+    for (const key in raw) {
+        // @ts-ignore idek whats wrong
+        element[key] = raw[key];
+    }
 
     return {
         setStyle(thingyy, value) {
@@ -66,6 +74,13 @@ const createElement = (type: elementTypes, options: createElementOptions): IElem
             element.addEventListener("click", callback);
             return this;
         },
+        onRightClick(callback) {
+            element.addEventListener("contextmenu", (event) => {
+                event.preventDefault();
+                callback();
+            });
+            return this;
+        },
         get element() {
             return element;
         }
@@ -95,5 +110,21 @@ const parseCSSAnimation = (animationObjects: {
     return cssString;
 }
 
+function createCssFromObjects(styleObjects: { selector: string, style: any }[]): string {
+    let cssString = '';
 
-export { createElement, parseCSSAnimation, IElement };
+    styleObjects.forEach(({ selector, style }) => {
+        cssString += `${selector} {\n`;
+
+        for (const property in style) {
+            cssString += `    ${property}: ${style[property]};\n`;
+        }
+
+        cssString += '}\n';
+    });
+
+    return cssString;
+}
+
+
+export { createCssFromObjects, createElement, parseCSSAnimation, IElement };
