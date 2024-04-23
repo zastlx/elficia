@@ -1,4 +1,4 @@
-import { moduleManager } from "./Module/ModuleManager";
+import { moduleManager } from "./module/ModuleManager";
 import { testModule } from "@modules/index";
 import "./gui/index";
 moduleManager.registerModule(testModule);

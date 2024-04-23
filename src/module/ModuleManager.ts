@@ -1,5 +1,5 @@
 import keybindManager from "keybind/KeybindManager";
-import { IModuleSetting, IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types.ts";
+import { IModuleSetting, IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types";
 import { guiManager } from "gui/GUIManager";
 
 class ModuleManager implements IModuleManager {

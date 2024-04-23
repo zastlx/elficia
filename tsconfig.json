@@ -16,7 +16,7 @@
         "paths": {
             "@api/*": ["./api/*"],
             "@cctypes/*": ["./types/*"],
-            "@modules/*": ["./Module/Modules/*"],
+            "@modules/*": ["./module/modules/*"],
         }
     },
     "include": [
