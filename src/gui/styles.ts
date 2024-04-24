@@ -317,10 +317,28 @@ const sliderSettingStyles = [
         }
     },
 ];
+/*
+<div style="
+    display: flex;
+    position: absolute;
+    align-items: center;
+    color: black;
+    width: 80%;
+    justify-content: center;
+"><span style="
+">100</span></div>
+*/
+const numberModuleSettingValueDisplayContainer = {
+    display: "flex",
+    position: "absolute",
+    alignItems: "center",
+    color: "black",
+    width: "80%",
+    justifyContent: "center",
+};
 
 
-
-export { numberModuleSettingOuterContainer, numberModuleSettingInnerContainer, boolSettingIndicator, boolModuleSetting, sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
+export { numberModuleSettingValueDisplayContainer, numberModuleSettingOuterContainer, numberModuleSettingInnerContainer, boolSettingIndicator, boolModuleSetting, sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
 
 /*
 .gui {

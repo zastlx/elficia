@@ -2,7 +2,7 @@ import { gui, catagories } from "./index";
 import { IElement, createElement, createCssFromObjects } from "./helper";
 import { Module } from "module/ModuleManager";
 import * as styles from "./styles";
-import { ModuleSettingBool } from "module/ModuleManager.types";
+import { ModuleSettingBool, ModuleSettingNumber } from "module/ModuleManager.types";
 
 interface IGUIManager {
     registerModule(module: Module): void;
@@ -27,7 +27,7 @@ class GUIManager implements IGUIManager {
 
     constructor() {
         console.log("Initlizing GUIManager");
-        const guiStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles-settings" })
+        createElement("style", { style: { display: "none" }, id: "elficia-styles-settings" })
             .setInnerHtml(createCssFromObjects(styles.sliderSettingStyles))
             .appendTo(document.head);
 
@@ -137,6 +137,16 @@ class GUIManager implements IGUIManager {
                                 setting.currentValue = !setting.currentValue;
                                 module.onSettingsUpdate(name);
                                 settingEnabledIndicator.setStyle("display", setting.currentValue ? "block" : "none");
+                            })
+                            .onHover((hovering) => {
+                                if (hovering) {
+                                    this.moduleDescription.setText(setting.description);
+                                    this.moduleDescription.setStyle("display", "flex");
+                                }
+                                else {
+                                    this.moduleDescription.setText("");
+                                    this.moduleDescription.setStyle("display", "none");
+                                }
                             });
                         const settingTitle = createElement("span", { style: { color: "white", fontSize: "1vw" } })
                             .setText(name);
@@ -148,48 +158,31 @@ class GUIManager implements IGUIManager {
                         moduleSettingsElements.push(settingElement);
                         break;
                     }
-                    case "number": {
-                        /*dragging = false
-hovering = false
-clicked = false
-
-temp1.onmouseover = () => {
-    hovering = true
-    dragging = clicked && hovering;
-}
-temp1.onmouseout = () => {
-    hovering = false
-    dragging = clicked && hovering;
-}
-temp1.onmousedown = () => {
-    clicked = true;
-    dragging = clicked && hovering;
-}
-temp1.onmousemove = (event) => {
-    if (!dragging) return;
-    
-      const divRect = temp1.getBoundingClientRect();
-      const mouseX = event.clientX;
-      const mouseY = event.clientY;
-      const offset = mouseX - divRect.left;
-      const percentageX = (offset / divRect.width) * 100;
-      if (mouseX >= divRect.left && mouseX <= divRect.right && mouseY >= divRect.top && mouseY <= divRect.bottom) console.log(Math.round(percentageX));
-}
-document.onmouseup = () => {
-    clicked = false;
-    dragging = clicked && hovering;
-}*/                     
+                    case "number": {            
                         let state = {
                             dragging: false,
                             hovering: false,
                             clicked: false
                         }
                         const settingElement = createElement("div", { style: styles.boolModuleSetting })
-                            .appendTo(moduleSettingsContainer.element);
+                            .appendTo(moduleSettingsContainer.element)
+                            .onHover((hovering) => {
+                                if (hovering) {
+                                    this.moduleDescription.setText(setting.description);
+                                    this.moduleDescription.setStyle("display", "flex");
+                                }
+                                else {
+                                    this.moduleDescription.setText("");
+                                    this.moduleDescription.setStyle("display", "none");
+                                }
+                            });
                         const settingTitle = createElement("span", { style: { color: "white", fontSize: "1vw" } })
                             .setText(name);
-
-                        const settingInner = createElement("div", { style: styles.numberModuleSettingInnerContainer });
+                        const settingValueDisplayContainer = createElement("div", { style: styles.numberModuleSettingValueDisplayContainer });
+                        const settingValueDisplay = createElement("span", {})
+                            .setText((setting as ModuleSettingNumber).currentValue.toString());
+                        const settingInner = createElement("div", { style: styles.numberModuleSettingInnerContainer })
+                            .setStyle("width", `${(setting as ModuleSettingNumber).currentValue/((setting as ModuleSettingNumber).max/100)}%`);
                         const settingOuter = createElement("div", { style: styles.numberModuleSettingOuterContainer })
                             .onHover((hovering) => {
                                 state.hovering = hovering;
@@ -211,8 +204,9 @@ document.onmouseup = () => {
                                 const offset = mouseX - divRect.left;
                                 const percentageX = (offset / divRect.width) * 100;
                                 if (mouseX >= divRect.left && mouseX <= divRect.right && mouseY >= divRect.top && mouseY <= divRect.bottom) {
-                                    setting.currentValue = Math.round(percentageX);
+                                    setting.currentValue = Math.round((setting as ModuleSettingNumber).max * (percentageX/100));
                                     module.onSettingsUpdate(name);
+                                    settingValueDisplay.setText((setting as ModuleSettingNumber).currentValue.toString());
                                     settingInner.setStyle("width", `${percentageX}%`);
                                 }
                             });
@@ -222,6 +216,8 @@ document.onmouseup = () => {
                             state.dragging = state.clicked && state.hovering;
                         });
                         settingTitle.appendTo(settingElement.element);
+                        settingValueDisplay.appendTo(settingValueDisplayContainer.element);
+                        settingValueDisplayContainer.appendTo(settingOuter.element);
                         settingOuter.appendTo(settingElement.element);
                         settingInner.appendTo(settingOuter.element);
                         moduleSettingsElements.push(settingElement);
