@@ -5,6 +5,8 @@
 // @match        https://945737671223947305.discordsays.com/*
 // ==/UserScript==
 
+// go to https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html
+
 /* eslint-disable */
 const startBtn = document.createElement("button");
 startBtn.textContent = "Start";
