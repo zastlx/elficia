@@ -246,6 +246,34 @@ const boolSettingIndicator = {
     position: "absolute",
 };
 
+/*<div style="
+    width: 80%;
+    height: 1vw;
+    background-color: rgba(255,255,255,0.2);
+    border: 4px solid rgba(0,0,0);
+    overflow: hidden;
+    cursor: col-resize;
+"><div style="
+    width: 90%;
+    height: 100%;
+    background-color: rgba(151, 69, 245, 5);
+"></div></div>*/
+
+const numberModuleSettingOuterContainer = {
+    width: "80%",
+    height: "1vw",
+    backgroundColor: "rgba(255,255,255,0.2)",
+    border: "4px solid rgba(0,0,0)",
+    overflow: "hidden",
+    cursor: "pointer",
+};
+
+const numberModuleSettingInnerContainer = {
+    width: "90%",
+    height: "100%",
+    backgroundColor: "rgba(151, 69, 245, 5)",
+};
+
 const sliderSettingStyles = [
     {
         selector: "input[type=range]::-webkit-slider-thumb",
@@ -292,7 +320,7 @@ const sliderSettingStyles = [
 
 
 
-export { boolSettingIndicator, boolModuleSetting, sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
+export { numberModuleSettingOuterContainer, numberModuleSettingInnerContainer, boolSettingIndicator, boolModuleSetting, sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
 
 /*
 .gui {

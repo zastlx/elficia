@@ -22,7 +22,6 @@ class FPSUnlockedModule extends Module {
     }
 
     onSettingsUpdate(setting: string): void {
-        console.log(setting);
     }
 }
 

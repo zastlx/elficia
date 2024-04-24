@@ -148,7 +148,84 @@ class GUIManager implements IGUIManager {
                         moduleSettingsElements.push(settingElement);
                         break;
                     }
-                    case "number":
+                    case "number": {
+                        /*dragging = false
+hovering = false
+clicked = false
+
+temp1.onmouseover = () => {
+    hovering = true
+    dragging = clicked && hovering;
+}
+temp1.onmouseout = () => {
+    hovering = false
+    dragging = clicked && hovering;
+}
+temp1.onmousedown = () => {
+    clicked = true;
+    dragging = clicked && hovering;
+}
+temp1.onmousemove = (event) => {
+    if (!dragging) return;
+    
+      const divRect = temp1.getBoundingClientRect();
+      const mouseX = event.clientX;
+      const mouseY = event.clientY;
+      const offset = mouseX - divRect.left;
+      const percentageX = (offset / divRect.width) * 100;
+      if (mouseX >= divRect.left && mouseX <= divRect.right && mouseY >= divRect.top && mouseY <= divRect.bottom) console.log(Math.round(percentageX));
+}
+document.onmouseup = () => {
+    clicked = false;
+    dragging = clicked && hovering;
+}*/                     
+                        let state = {
+                            dragging: false,
+                            hovering: false,
+                            clicked: false
+                        }
+                        const settingElement = createElement("div", { style: styles.boolModuleSetting })
+                            .appendTo(moduleSettingsContainer.element);
+                        const settingTitle = createElement("span", { style: { color: "white", fontSize: "1vw" } })
+                            .setText(name);
+
+                        const settingInner = createElement("div", { style: styles.numberModuleSettingInnerContainer });
+                        const settingOuter = createElement("div", { style: styles.numberModuleSettingOuterContainer })
+                            .onHover((hovering) => {
+                                state.hovering = hovering;
+                                state.dragging = state.clicked && state.hovering;
+                            })
+                            .onMouseDown(() => {
+                                state.clicked = true;
+                                state.dragging = state.clicked && state.hovering;
+                            })
+                            .onMouseUp(() => {
+                                state.clicked = false;
+                                state.dragging = state.clicked && state.hovering;
+                            })
+                            .onMouseMove((event) => {
+                                if (!state.dragging) return;
+                                const divRect = settingOuter.element.getBoundingClientRect();
+                                const mouseX = event.clientX;
+                                const mouseY = event.clientY;
+                                const offset = mouseX - divRect.left;
+                                const percentageX = (offset / divRect.width) * 100;
+                                if (mouseX >= divRect.left && mouseX <= divRect.right && mouseY >= divRect.top && mouseY <= divRect.bottom) {
+                                    setting.currentValue = Math.round(percentageX);
+                                    module.onSettingsUpdate(name);
+                                    settingInner.setStyle("width", `${percentageX}%`);
+                                }
+                            });
+
+                        document.addEventListener("mouseup", () => {
+                            state.clicked = false;
+                            state.dragging = state.clicked && state.hovering;
+                        });
+                        settingTitle.appendTo(settingElement.element);
+                        settingOuter.appendTo(settingElement.element);
+                        settingInner.appendTo(settingOuter.element);
+                        moduleSettingsElements.push(settingElement);
+                    }
                     case "enum":
                     case "string":
                         break;

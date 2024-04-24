@@ -16,6 +16,9 @@ interface IElement {
     onHover(callback: (hovering: boolean) => void): IElement;
     onClick(callback: () => void): IElement;
     onRightClick(callback: () => void): IElement;
+    onMouseUp(callback: () => void): IElement;
+    onMouseDown(callback: () => void): IElement;
+    onMouseMove(callback: (event: MouseEvent) => void): IElement;
 
     removeElement(): void;
     appendTo(element: Element): IElement;
@@ -79,6 +82,19 @@ const createElement = (type: elementTypes, options: createElementOptions, raw?: 
                 event.preventDefault();
                 callback();
             });
+            return this;
+        },
+        onMouseUp(callback) {
+            element.addEventListener("mouseup", callback);
+            return this;
+        },
+        onMouseDown(callback) {
+            element.addEventListener("mousedown", callback);
+            return this;
+        },
+        onMouseMove(callback) {
+            // @ts-ignore
+            element.addEventListener("mousemove", callback);
             return this;
         },
         get element() {
