@@ -21,6 +21,7 @@ interface IModule {
 
     onEnable(): void;
     onDisable(): void;
+    onSettingsUpdate(setting: string): void;
 }
 
 interface IModuleManager {
@@ -29,6 +30,7 @@ interface IModuleManager {
 }
 
 interface ModuleSetting {
+    type: "bool" | "number" | "string" | "enum";
     name: string;
     description: string;
 }
@@ -56,7 +58,7 @@ interface ModuleSettingEnum extends ModuleSetting {
     values: string[];
 }
 
-type ModuleCatagory = "Combat" | "Movement" | "Player" | "Render" | "World";
+type ModuleCatagory = "Visuals" | "World" | "Movement" | "Misc";
 
 export { 
     IModule,

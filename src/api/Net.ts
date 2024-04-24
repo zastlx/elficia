@@ -5,5 +5,6 @@ function getNetworkManager(): NetworkManager {
     // @ts-ignore
     return getGameManager().components.find(comp => comp._netGame);
 }
-
+// @ts-ignore
+window.gnm = getNetworkManager;
 export { getNetworkManager };

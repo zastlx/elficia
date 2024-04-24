@@ -1,7 +1,8 @@
 import { gui, catagories } from "./index";
 import { IElement, createElement, createCssFromObjects } from "./helper";
-import { Module } from "Module/ModuleManager";
+import { Module } from "module/ModuleManager";
 import * as styles from "./styles";
+import { ModuleSettingBool } from "module/ModuleManager.types";
 
 interface IGUIManager {
     registerModule(module: Module): void;
@@ -126,18 +127,46 @@ class GUIManager implements IGUIManager {
             moduleSettingOpenIndicator.appendTo(moduleNameElementContainer.element);
 
             const moduleSettingsElements: IElement[] = [];
+
+            module.getSettings().forEach((setting, name) => {
+                switch (setting.type) {
+                    case "bool": {
+                        const settingElement = createElement("div", { style: styles.boolModuleSetting })
+                            .appendTo(moduleSettingsContainer.element)
+                            .onClick(() => {
+                                setting.currentValue = !setting.currentValue;
+                                module.onSettingsUpdate(name);
+                                settingEnabledIndicator.setStyle("display", setting.currentValue ? "block" : "none");
+                            });
+                        const settingTitle = createElement("span", { style: { color: "white", fontSize: "1vw" } })
+                            .setText(name);
+                        const settingEnabledIndicator = createElement("hr", { style: styles.boolSettingIndicator } )
+                            .setStyle("display", setting.currentValue ? "block" : "none");
+                        
+                        settingTitle.appendTo(settingElement.element);
+                        settingEnabledIndicator.appendTo(settingElement.element);
+                        moduleSettingsElements.push(settingElement);
+                        break;
+                    }
+                    case "number":
+                    case "enum":
+                    case "string":
+                        break;
+                }
+            });
+
             
-            const testSliderSetting = createElement("div", { style: styles.sliderModuleSetting })
-                .appendTo(moduleSettingsContainer.element);
-            const testSliderSettingTitle = createElement("span", { style: {} })
-                .setText("Slider:");
-            const testSliderSettingSliderContainer = createElement("div", { style: styles.sliderModuleSettingSliderContainer });
-            const testSliderSettingSlider = createElement("input", { style: styles.sliderModuleSettingSliderInput }, { type: "range", min: "0", max: "100", value: "50" });
+            // const testSliderSetting = createElement("div", { style: styles.sliderModuleSetting })
+            //     .appendTo(moduleSettingsContainer.element);
+            // const testSliderSettingTitle = createElement("span", { style: {} })
+            //     .setText("Slider:");
+            // const testSliderSettingSliderContainer = createElement("div", { style: styles.sliderModuleSettingSliderContainer });
+            // const testSliderSettingSlider = createElement("input", { style: styles.sliderModuleSettingSliderInput }, { type: "range", min: "0", max: "100", value: "50" });
         
-            testSliderSettingTitle.appendTo(testSliderSetting.element);
-            testSliderSettingSliderContainer.appendTo(testSliderSetting.element);
-            testSliderSettingSlider.appendTo(testSliderSettingSliderContainer.element);
-            moduleSettingsElements.push(testSliderSetting);
+            // testSliderSettingTitle.appendTo(testSliderSetting.element);
+            // testSliderSettingSliderContainer.appendTo(testSliderSetting.element);
+            // testSliderSettingSlider.appendTo(testSliderSettingSliderContainer.element);
+            // moduleSettingsElements.push(testSliderSetting);
 
 
             this.moduleElements.push({

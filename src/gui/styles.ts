@@ -121,7 +121,8 @@ const moduleSettingsContainer = {
     top: "0",
     left: "0",
     overflow: "hidden",
-    height: "10vh",
+    minHeight: "10vh",
+    height: "fit-content",
     display: "none",
     width: "100%",
     flexDirection: "column",
@@ -214,7 +215,36 @@ const slideOutToUp = {
         filter: "opacity(0)",
     },
 };
-
+/*width: 100%;
+    height: 5vh;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1vh;*/
+const boolModuleSetting = {
+    width: "100%",
+    height: "5vh",
+    cursor: "pointer",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "1vw",
+};
+/*    width: 80%;
+    border: 2px solid rgba(151, 69, 245, 0.5);
+    margin: 0px;
+    padding: 0px;*/
+const boolSettingIndicator = {
+    width: "80%",
+    border: "0.3vh solid rgba(151, 69, 245, 0.5)",
+    margin: "0px",
+    padding: "0px",
+    transform: "translateY(1.5vh)",
+    position: "absolute",
+};
 
 const sliderSettingStyles = [
     {
@@ -262,7 +292,7 @@ const sliderSettingStyles = [
 
 
 
-export { sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
+export { boolSettingIndicator, boolModuleSetting, sliderModuleSetting, sliderModuleSettingSliderContainer, sliderModuleSettingSliderInput, sliderSettingStyles, moduleDescription, module, moduleContainer, moduleNameContainer, moduleSettingsContainer, catagory, gui, catagoryTitle, catagoryTitleText, catagoryTitleLine, guiIn, slideInFromUp, slideOutToUp };
 
 /*
 .gui {

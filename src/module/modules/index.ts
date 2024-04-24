@@ -1,5 +1,5 @@
-import testModule from "./test/index"
+import FPSUnlocker from "./misc/FPSUnlocker"
 
 export {
-    testModule
+    FPSUnlocker
 }

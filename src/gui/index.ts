@@ -33,7 +33,7 @@ const catagories = config.catagories.map((catagoryName, index) => {
         moduleContainer: catagoryModuleContainer
     };
 });
-const animationsStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles" }).setInnerHtml("@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');".concat(`* { font-family: 'VT323', monospace; };`).concat(parseCSSAnimation([
+const animationsStyle = createElement("style", { style: { display: "none" }, id: "elficia-styles" }).setInnerHtml("@import url(https://fonts.googleapis.com/css2?family=VT323&display=swap);".concat(`* { font-family: 'VT323', monospace; };`).concat(parseCSSAnimation([
     {
         name: "guiIn",
         style: guiIn

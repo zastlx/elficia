@@ -1,6 +1,7 @@
 import keybindManager from "keybind/KeybindManager";
 import { IModuleSetting, IModule, IModuleManager, ModuleCatagory, ModuleSettingBool, ModuleSetting, ModuleSettingNumber, ModuleSettingEnum, ModuleSettingString } from "./ModuleManager.types";
 import { guiManager } from "gui/GUIManager";
+import { FPSUnlocker } from "./modules";
 
 class ModuleManager implements IModuleManager {
     private modules: Module[] = [];
@@ -60,6 +61,7 @@ abstract class Module implements IModule {
 
         this.settings.set(name, {
             description: description,
+            type: "bool",
             currentValue: defaultValue
         } as ModuleSettingBool);
     }
@@ -75,6 +77,7 @@ abstract class Module implements IModule {
 
         this.settings.set(name, {
             description: description,
+            type: "number",
             currentValue: defaultValue,
             min: min,
             max: max
@@ -90,6 +93,7 @@ abstract class Module implements IModule {
 
         this.settings.set(name, {
             description: description,
+            type: "string",
             currentValue: defaultValue
         } as ModuleSettingString);
     }
@@ -105,7 +109,8 @@ abstract class Module implements IModule {
         this.settings.set(name, {
             description: description,
             currentValue: defaultValue,
-            values: values
+            values: values,
+            type: "enum"
         } as ModuleSettingEnum);
     }
 
@@ -152,6 +157,7 @@ abstract class Module implements IModule {
     abstract getDisplayName(): string;
     abstract onEnable(): void;
     abstract onDisable(): void;
+    abstract onSettingsUpdate(setting: string): void;
 
     
 }

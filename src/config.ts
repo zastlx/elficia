@@ -1,4 +1,4 @@
-import { moduleManager } from "Module/ModuleManager";
+import { moduleManager } from "module/ModuleManager";
 
 export default {
     catagories: [

@@ -1,13 +1,10 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "module": "AMD",
-        "outDir": "dist",
-        "outFile": "dist/index.js",
+        "target": "es6",         
+        "module": "commonjs", // Or a more modern ES module option if your Node.js version supports it       
+        "outDir": "dist",   
         "strict": true,
         "esModuleInterop": true,
-        "noEmit": true,
-        "allowImportingTsExtensions": true,
         "types": [
             "@cocos/creator-types/engine",
             "@cocos/creator-types/editor"
@@ -16,14 +13,11 @@
         "paths": {
             "@api/*": ["./api/*"],
             "@cctypes/*": ["./types/*"],
-            "@modules/*": ["./module/modules/*"],
+            "@modules/*": ["./module/modules/*"]
         }
     },
     "include": [
         "src/**/*.ts",
         "src/**/*.tsx"
-    ],
-    "exclude": [
-        "node_modules"
     ]
 }
