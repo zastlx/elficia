@@ -9,7 +9,7 @@
     "typescript": "^5.3.3"
   },
   "scripts": {
-    "build": "bun run ./scripts/build.mjs",
+    "build": "npm run ./scripts/build.mjs",
     "watch": "bun run ./scripts/watch.mjs"
   },
   "devDependencies": {
