@@ -4,7 +4,6 @@ import { getGameManager } from "@api/Game";
 import cocos from "@api/cocos";
 import { ModuleSettingBool, ModuleSettingNumber } from "module/ModuleManager.types";
 import { after } from "spitroast";
-import { unpatch } from "spitroast/dist/types/unpatch";
 
 enum GameState {
     Init = 0,

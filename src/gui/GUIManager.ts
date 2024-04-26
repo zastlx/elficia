@@ -67,7 +67,8 @@ class GUIManager implements IGUIManager {
                 fontSize: "4vh",
                 left: "85%"
             } })
-            .setText("+");
+            .setText("+")
+            .setStyle("display", module.getSettings().size > 0 ? "block" : "none");
             const moduleNameElementContainer = createElement("div", { style: {
                 ...styles.moduleNameContainer,
                 flexDirection: "row",
@@ -104,6 +105,7 @@ class GUIManager implements IGUIManager {
                     }
                 })
                 .onRightClick(() => {
+                    if (module.getSettings().size === 0) return;
                     if (settingsOpen) {
                         moduleSettingOpenIndicator.setText("+");
                         moduleSettingsContainer.setStyle("display", "none");
