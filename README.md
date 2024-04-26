@@ -8,7 +8,7 @@
     <a href="https://opensource.org/license/mit"><img src="https://img.shields.io/static/v1?label=license&message=MIT&color=orange&logo=creative%20commons&logoColor=white" alt="License" /></a>
   </p>
   <p>
-    <strong>elficia</strong> is a utlity modification for Discord's putt party activity, I am not responsible for anything you do with this modification.<br/>
+    <strong>elficia</strong> is a utlity modification for Discord's Putt Party activity, I am not responsible for anything you do with this modification.<br/>
 If you want to contribute just fork and open a pull request.
   </p>
 </div>
