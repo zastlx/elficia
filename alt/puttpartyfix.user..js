@@ -1,11 +1,12 @@
 // ==UserScript==
 // @name         putt party fix
 // @version      2024-04-23
-// @description  gay
+// @description  real
 // @match        https://945737671223947305.discordsays.com/*
 // ==/UserScript==
 
 // go to https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html
+// these require you to run `bunx serve . -p 5050` in the root of the project
 
 /* eslint-disable */
 const startBtn = document.createElement("button");
@@ -33,9 +34,21 @@ startBtn.onclick = () => {
 				}
 			}
 		});
-		cc.game.run()
-        fetch("http://localhost:5050/dist/elficia.js").then(a=>a.text()).then(eval)
+		cc.game.run();
 	});
 };
 
+const elf = document.createElement("button");
+elf.textContent = "Elficia";
+elf.style.position = "absolute";
+elf.style.top = "0";
+elf.style.left = "0";
+elf.style.zIndex = "999";
+
+elf.onclick = () => fetch("http://localhost:5050/dist/elficia.js").then(a=>a.text()).then(() => {
+    elf.remove();
+    fetch("http://localhost:5050/dist/elficia.js").then(a => a.text()).then(eval);
+});
+
+document.body.appendChild(elf);
 document.body.appendChild(startBtn);
