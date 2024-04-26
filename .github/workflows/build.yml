@@ -16,6 +16,5 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: oven-sh/setup-bun@v1
-    - name: Use Node.js ${{ matrix.node-version }}
     - run: bun i
     - run: bun run build
