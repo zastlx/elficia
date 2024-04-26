@@ -5,7 +5,7 @@ name: Build
 on:
   push:
     branches: [ "main" ]
-    paths: [ "src/**", "scripts/**", ".github/workflows/build.yml", "package.json", "bun.lockb" ]
+    paths: [ "src/**", "scripts/**", ".github/workflows/build.yml", "package.json", "bun.lockb", "tsconfig.json" ]
   pull_request:
     branches: [ "main" ]
 
