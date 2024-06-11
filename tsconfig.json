@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "es6",         
+        "target": "ESNext",         
         "module": "commonjs", // Or a more modern ES module option if your Node.js version supports it       
         "outDir": "dist",   
         "strict": true,

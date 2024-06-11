@@ -1,6 +1,6 @@
 import { Module } from "./ModuleManager";
 
-type IModuleSetting = 
+type IModuleSetting =
     ModuleSettingBool |
     ModuleSettingNumber |
     ModuleSettingString |
@@ -58,9 +58,9 @@ interface ModuleSettingEnum extends ModuleSetting {
     values: string[];
 }
 
-type ModuleCatagory = "Visuals" | "World" | "Movement" | "Misc";
+type ModuleCatagory = "Visuals" | "World" | "Movement" | "Misc" | "Exploit";
 
-export { 
+export {
     IModule,
     IModuleManager,
     ModuleSetting,

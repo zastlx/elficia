@@ -1,6 +1,4 @@
 import cocos from "@api/cocos";
-import { Scene } from "cc";
-import { getGameManager } from "./Game";
 import { getNetworkManager } from "./Net";
 
 
@@ -12,16 +10,33 @@ const allScenes: {
     name: s.url.match(/\/([^/]+)\.scene$/)?.[1] || null
 }));
 
-function getScene(): Scene {
-    return cocos().director.getScene()!;
+function getScene() {
+    try {
+        return cocos().director.getScene()!;
+    } catch (error) {
+        console.warn("Failed to get scene", error);
+        return null;
+    }
+    //return cocos().director.getScene()!;
 }
 
 function getLocalBall() {
-    return getNetworkManager()._netGame.localPlayer.localState.visual.node;
+    try {
+        return getNetworkManager()?._netGame.localPlayer.localState.visual.node;
+    } catch (error) {
+        console.warn("Failed to get local ball", error);
+        return null;
+    }
 }
 
 function getBallController() {
-    return getNetworkManager()._netGame.localPlayer.localState.visual;
+    try {
+        return getNetworkManager()?._netGame.localPlayer.localState.visual;
+    } catch (error) {
+        console.warn("Failed to get ball controller", error);
+        return null;
+    }
+    //return getNetworkManager()._netGame.localPlayer.localState.visual;
 }
 
 

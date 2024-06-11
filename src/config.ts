@@ -6,6 +6,7 @@ export default {
         "World",
         "Movement",
         "Misc",
+        "Exploit"
     ],
     githubUrl: "https://github.com/zastlx/elficia",
     authors: [{

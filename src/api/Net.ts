@@ -1,7 +1,7 @@
 import { getGameManager } from "@api/Game";
 import { NetworkManager } from "@cctypes/net";
 
-function getNetworkManager(): NetworkManager {
+function getNetworkManager(): NetworkManager | undefined {
     // @ts-ignore
     return getGameManager().components.find(comp => comp._netGame);
 }

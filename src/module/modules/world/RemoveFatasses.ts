@@ -13,11 +13,11 @@ class EjectModule extends Module {
     onEnable(): void {
         // for some reason they are located in a different positions in the node tree depending on the map ???? discord stupid
         try {
-            getScene().getChildByName("LevelCharacters")?.setScale(0,0,0)
+            getScene()?.getChildByName("LevelCharacters")?.setScale(0, 0, 0)
             // most maps seem to do this
-            getScene().getChildByName("Level")?.getChildByName("Level_Characters")?.setScale(0,0,0);
+            getScene()?.getChildByName("Level")?.getChildByName("Level_Characters")?.setScale(0, 0, 0);
             // Jumpington
-            getScene().getChildByName("Level")?.getChildByName("Levels_Characters")?.setScale(0,0,0);
+            getScene()?.getChildByName("Level")?.getChildByName("Levels_Characters")?.setScale(0, 0, 0);
         } catch (error) {
             console.error("Failed to remove fatasses", error)
         }
@@ -25,9 +25,9 @@ class EjectModule extends Module {
 
     onDisable(): void {
         try {
-            getScene().getChildByName("LevelCharacters")?.setScale(1,1,1)
-            getScene().getChildByName("Level")?.getChildByName("Level_Characters")?.setScale(1,1,1);
-            getScene().getChildByName("Level")?.getChildByName("Levels_Characters")?.setScale(1,1,1);
+            getScene()?.getChildByName("LevelCharacters")?.setScale(1, 1, 1)
+            getScene()?.getChildByName("Level")?.getChildByName("Level_Characters")?.setScale(1, 1, 1);
+            getScene()?.getChildByName("Level")?.getChildByName("Levels_Characters")?.setScale(1, 1, 1);
         } catch (error) {
             console.error("Failed to add fatasses", error)
         }

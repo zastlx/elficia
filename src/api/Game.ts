@@ -1,7 +1,12 @@
 import { getScene } from "@api/Scene";
 
 function getGameManager() {
-    return getScene().getChildByName("GameManager")!;
+    try {
+        return getScene()?.getChildByName("GameManager");
+    } catch (error) {
+        console.warn("Failed to get GameManager", error);
+        return null;
+    }
 };
 
 export { getGameManager };

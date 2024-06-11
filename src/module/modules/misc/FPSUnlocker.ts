@@ -61,7 +61,7 @@ class FPSUnlockedModule extends Module {
 
     onEnable(): void {
         this.updateFPS();
-        this.unpatch = after("SendCurrentState", getGameManager().getChildByName("GolfMode")!.getComponent("GolfMode"), (args) => {
+        this.unpatch = after("SendCurrentState", getGameManager()?.getChildByName("GolfMode")!.getComponent("GolfMode"), (args) => {
             this.currentGameState = args[0];
             this.updateFPS();
         });
