@@ -31,10 +31,8 @@ class FPSUnlockedModule extends Module {
         // incase i fail cleanup
         if (!this.isEnabled()) return;
 
-        // i dont reasonably see anyones computer being able to handle above this \_(;-;)_/
-        if ((this.getSettings().get("Infinite FPS") as ModuleSettingBool).currentValue) return cocos().game.setFrameRate(99999);
         if (!document.hasFocus()) return cocos().game.setFrameRate((this.getSettings().get("Unfocused FPS") as ModuleSettingNumber)?.currentValue);
-            
+
         switch (this.currentGameState) {
             case GameState.Init:
             case GameState.GameplayModeSelect:
@@ -60,6 +58,7 @@ class FPSUnlockedModule extends Module {
     }
 
     onEnable(): void {
+        if (this.getSettings().get("Infinite FPS")?.currentValue) return cocos().game.setFrameRate(999999);
         this.updateFPS();
         this.unpatch = after("SendCurrentState", getGameManager()?.getChildByName("GolfMode")!.getComponent("GolfMode"), (args) => {
             this.currentGameState = args[0];
