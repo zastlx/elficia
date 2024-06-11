@@ -2,7 +2,7 @@
 import { Module } from "../../ModuleManager";
 import { getGameManager } from "@api/Game";
 import cocos from "@api/cocos";
-import { ModuleSettingBool, ModuleSettingNumber } from "module/ModuleManager.types";
+import { ModuleSettingNumber } from "module/ModuleManager.types";
 import { after } from "spitroast";
 
 enum GameState {
@@ -30,6 +30,8 @@ class FPSUnlockedModule extends Module {
     updateFPS(): void {
         // incase i fail cleanup
         if (!this.isEnabled()) return;
+
+        if (this.getSettings().get("Infinite FPS")?.currentValue) return cocos().game.setFrameRate(999999);
 
         if (!document.hasFocus()) return cocos().game.setFrameRate((this.getSettings().get("Unfocused FPS") as ModuleSettingNumber)?.currentValue);
 
