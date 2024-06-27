@@ -52,7 +52,7 @@ bunx serve . -p 5050
 ### Step 6
 
 Go to the [browser link](https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html) of putt party and you should see a button that says "Start" click it and you should see the game start, after you see the home screen of the game, you should click the "Elficia" button in the top left corner of the screen, after that you can click the right shift key to open Elficia's clickgui.
-![Elficia's menu](image.png)
+![Elficia's menu](preview.png)
 
 ### Step 7
 
