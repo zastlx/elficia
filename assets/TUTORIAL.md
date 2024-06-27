@@ -33,7 +33,7 @@ bun watch
 If not you can run the following command to compile the code once.
 
 ```bash
-# Hint: you cant use 'bun build' because that is a built in bun command and will not work.script
+# Hint: you cant use 'bun build' because that is a built in bun command and will not work
 bun run build
 ```
 
