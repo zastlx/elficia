@@ -1,18 +1,16 @@
 // ==UserScript==
 // @name         putt party fix
 // @version      2024-04-23
-// @description  real
+// @description  gay
 // @match        https://945737671223947305.discordsays.com/*
 // ==/UserScript==
-
-// go to https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html
-// these require you to run `bunx serve . -p 5050` in the root of the project
 
 /* eslint-disable */
 const startBtn = document.createElement("button");
 startBtn.textContent = "Start";
 startBtn.onclick = () => {
     startBtn.remove();
+	const topLevelImport = (url) => System.import(url);
 
 	const gdiv = document.createElement("canvas");
 	gdiv.id = "GameCanvas";
@@ -23,17 +21,18 @@ startBtn.onclick = () => {
 	canvas.width = bcr.width;
 	canvas.height = bcr.height;
 
-	System.import("cc").then(async (cc) => {
+	topLevelImport("cc").then(async (cc) => {
 		await cc.game.init({
 			debugMode: cc.DebugMode.INFO,
-			settingsPath: "http://localhost:5050/alt/settings.json",
+			settingsPath: "http://localhost:5050/assests/settings.json",
 			overrideSettings: {
 				profiling: {
 					showFPS: true
 				}
 			}
 		});
-		cc.game.run();
+		cc.game.run()
+        //fetch("http://localhost:5050/dist/elficia.js").then(a=>a.text()).then(eval)
 	});
 };
 
@@ -44,7 +43,7 @@ elf.style.top = "0";
 elf.style.left = "0";
 elf.style.zIndex = "999";
 
-elf.onclick = () => fetch("http://localhost:5050/dist/elficia.js").then(a => a.text()).then(() => {
+elf.onclick = () => fetch("http://localhost:5050/dist/elficia.js").then(a=>a.text()).then(() => {
     elf.remove();
     fetch("http://localhost:5050/dist/elficia.js").then(a => a.text()).then(eval);
 });

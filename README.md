@@ -15,7 +15,7 @@ If you want to contribute just fork and open a pull request.
 </div>
 
 # Contribute
-If you would like to contribute please feel free to open a pull request, if you find any bugs or have a feature request, feel free to open an issue.
+If you would like to contribute please feel free to open a pull request, if you find any bugs or have a feature request, feel free to open an issue, take a look at [the tutorial](https://github.com/zastlx/elficia/blob/main/assets/TUTORIAL.md)
 
 <!--- # Preview
 add images of client after there is a decent amt of modules
