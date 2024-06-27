@@ -88,6 +88,8 @@ Click on the dropdown in the top left corner of the console, it should say `top`
 ### Step 5
 
 Chose the dropdown that says `iframe-container (index.html)`
+
+
 ![visual2](image-1.png)
 
 ### Step 6
