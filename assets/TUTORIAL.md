@@ -51,7 +51,7 @@ bunx serve . -p 5050
 
 ### Step 6
 
-Go to the [browser link](https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html) of putt party and you should see a button that says "Start" click it and you should see the game start, after you see the home screen of the game, you should click the "Elficia" button in the top left corner of the screen, after that you can click the right shift key to open Elficia's clickgui.
+Go to the [browser link](https://945737671223947305.discordsays.com/versions/Prod-38-CLaa997/index.html) of putt party and you should see a button that says "Start" click it and you should see the game start, after you see the home screen of the game, you should click the "Elficia" button in the top left corner of the screen, after that you can click the right shift key to open Elficia's clickgui.   
 ![Elficia's menu](preview.png)
 
 ### Step 7
@@ -82,14 +82,12 @@ Open the developer console with `Ctrl + Shift + I`
 
 ### Step 4
 
-Click on the dropdown in the top left corner of the console, it should say `top`
+Click on the dropdown in the top left corner of the console, it should say `top`   
 ![visual](image.png)
 
 ### Step 5
 
-Chose the dropdown that says `iframe-container (index.html)`
-
-
+Chose the dropdown that says `iframe-container (index.html)`   
 ![visual2](image-1.png)
 
 ### Step 6
