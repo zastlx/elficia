@@ -24,7 +24,7 @@ startBtn.onclick = () => {
 	topLevelImport("cc").then(async (cc) => {
 		await cc.game.init({
 			debugMode: cc.DebugMode.INFO,
-			settingsPath: "http://localhost:5050/assests/settings.json",
+			settingsPath: "http://localhost:5050/assets/settings.json",
 			overrideSettings: {
 				profiling: {
 					showFPS: true
